@@ -50,8 +50,9 @@ def Main():
     
     #greaterThanMethod()
 
-    greaterThanMethod2(player1, sillyPlayer1)
-    greaterThanMethod2(player2, sillyPlayer2)
+    greaterThanMethod(player1, sillyPlayer1)
+    greaterThanMethod(player2, sillyPlayer2)
+    
     print(sillyPlayer1)
     print(sillyPlayer2)
     
@@ -67,12 +68,10 @@ def Main():
     end()
 
 #Finds Dominant Intersection through Difference Calculations
-def differenceMethod():
+def differenceMethod(player1, player2, difference):
     for x in range(2):
         for y in range(2):
             difference[x][y] = abs((player1[x][y])-(player2[x][y]))
-            #print(x)
-            #print(y)
             print("P1 ([{0}][{1}]): {2}".format(x,y,player1[x][y]))
             print("P2 ([{0}][{1}]): {2}".format(x,y,player2[x][y]))
             print("Difference: {0}".format(difference[x][y]))
@@ -163,50 +162,18 @@ def differenceComparision():
 ##                dominant[x][y] = 0
     return
 
-def greaterThanMethod():
-    #both for whether player 1 and player 2 win OR by column as to whether your own reward is greater
-    for x in range(len(player1)):
-        for y in range(len(player1)):
-            if player1[x][0] < player1[y][0]:
-                sillyPlayer1[x][0] = 1
-                
-            if player1[x][1] < player1[y][1]:
-                sillyPlayer1[x][1] = 1
+def greaterThanMethod(player, playerResult):
+    for x in range(len(player)):
+        for y in range(len(player)):
+            for z in range(len(player)):
+                if player[x][z] < player[y][z]:
+                    playerResult[x][z] = 1
+        return
 
-            if player1[x][2] < player1[y][2]:
-                sillyPlayer1[x][2] = 1
+def greaterThanComparision(playerResult):
 
-            if player1[x][3] < player1[y][3]:
-                sillyPlayer1[x][3] = 1
-
-
-
-            if player2[x][0] < player2[y][0]:
-                sillyPlayer2[x][0] = 1
-
-            if player2[x][1] < player2[y][1]:
-                sillyPlayer2[x][1] = 1
-                
-            if player2[x][2] < player2[y][2]:
-                sillyPlayer2[x][2] = 1
-                
-            if player2[x][3] < player2[y][3]:
-                sillyPlayer2[x][3] = 1
-
-    print(sillyPlayer1)
-    print(sillyPlayer2)
     
     return
-
-def greaterThanMethod2(player, playerResult):
-        for x in range(len(player)):
-            for y in range(len(player)):
-                for z in range(len(player)):
-                    if player[x][z] < player[y][z]:
-                        playerResult[x][z] = 1
-
-def greaterThanComparision():
-    
 
 #Find equilibrium by looking for matching 0 result values
 
