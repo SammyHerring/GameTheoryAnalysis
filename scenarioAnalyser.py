@@ -1,6 +1,8 @@
 import sys
 import numpy as np
-#Difference Method Solution to find Nach Equilibrium
+#Difference + Silly Strategies Method Solution to find Nach Equilibrium
+
+#Dominant Solution NB:
 #Proof of Concept to find the dominant solutions to produce a nach equilibrium where difference values are equal.
 #We may prove the nach equilibrium result by selecting the intersection with the maximum original input value.
 
@@ -55,8 +57,20 @@ def Main():
     
     print(sillyPlayer1)
     print(sillyPlayer2)
+
+    print("")
+    printMatrix(player1)
+    print("")
+    printMatrix(player2)
+    print("")
+    print("")
+    printMatrix(sillyPlayer1)
+    print("")
+    printMatrix(sillyPlayer2)
+    print("")
     
-    #greaterThanComparision()
+    greaterThanComparision(sillyPlayer1, sillyPlayer2)
+    
     #print("Silly Strategies Bool Array: ", silly)
 
     #NB: Task 3 Addition for potential saddle point calculation
@@ -166,18 +180,23 @@ def greaterThanMethod(player, playerResult):
     for x in range(len(player)):
         for y in range(len(player)):
             for z in range(len(player)):
+                #print(x,y,z)
                 if player[x][z] < player[y][z]:
                     playerResult[x][z] = 1
-        return
 
-def greaterThanComparision(playerResult):
-
-    
+def greaterThanComparision(playerResult1, playerResult2):
+    #Find equilibrium by looking for matching 0 result values
+    for x in range(len(playerResult1 or playerResult2)):
+        for y in range(len(playerResult1 or playerResult2)):
+            if playerResult1[x][y] == 0 and playerResult2[x][y] == 0:
+                print("Nach Equilibrium Found: ", x,y)
     return
 
-#Find equilibrium by looking for matching 0 result values
+#Sub Procedures and Functions for UI elements
+def printMatrix(matrix):
+    print('\n'.join([''.join(['{:4}'.format(item) for item in row]) 
+      for row in matrix]))
 
-#Sub Procedures for the System's UI elements in later development.
 def userConfirm(question): #Require the user to confirm a qustion and return a boolean result
     reply = str(input(question+' (y/n): ')).lower().strip()
     if reply[0] == 'y':
