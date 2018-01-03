@@ -12,6 +12,11 @@ player12x2 = [[3, 8],
 player22x2 = [[3, 0],
            [8, 4]]
 
+##difference2x2 = [[0, 0],
+##              [0, 0]]
+##dominant2x2 = [[0, 0],
+##            [0, 0]]
+
 #Matrices re-written in column-down format
 player1 = [[7, 2, 3, 5],
            [7, 2, 90, 0],
@@ -31,11 +36,6 @@ dominant = [[0, 0, 0, 0],
             [0, 0, 0, 0],
             [0, 0, 0, 0],
             [0, 0, 0, 0]]
-
-##difference = [[0, 0],
-##              [0, 0]]
-##dominant = [[0, 0],
-##            [0, 0]]
 
 sillyPlayer1 = [[0, 0, 0, 0],
                 [0, 0, 0, 0],
@@ -143,7 +143,7 @@ def greaterThanComparision(playerResult1, playerResult2):
 
 #Sub Procedures and Functions for UI elements
 def printMatrix(matrix):
-    print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in matrix]))
+    print('\n'.join([''.join(['{:4}'.format(int(item)) for item in row]) for row in matrix]))
 
 def userConfirm(question): #Require the user to confirm a qustion and return a boolean result
     reply = str(input(question+' (y/n): ')).lower().strip()
