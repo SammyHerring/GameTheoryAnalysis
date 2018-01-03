@@ -60,14 +60,10 @@ equilibriumFound = False
 
 #Proposed method for producing entire solution checking for both dominant and stupid solutions.
 def Main():
-##    differenceMethod(player1, player2, difference)
-##    differenceComparision()
-##    print("Difference Array: ")
-##    printMatrix(difference)
-##    print("")
-##    print("Dominant Array: ")
-##    printMatrix(dominant)
-##    print("")
+    differenceMethod(player1, player2, difference)
+    differenceComparision()
+    printMatrix(difference, "Difference Array", True)
+    printMatrix(dominantResult, "Dominant Array", True)
 
     greaterThanMethod(player1, stupidPlayer1)
     greaterThanMethod(player2, stupidPlayer2)
@@ -107,20 +103,19 @@ def differenceComparision():
             print("([{0}][{1}])".format(x,y))
             try: 
                 if (difference[x][y] == difference[x][y+1]):
-                    dominant[x][y] = 1
+                    dominantResult[x][y] = 1
                     print("([{0}][{1}]): True".format(x,y))
                 elif (difference[x][y] == difference[x+1][y]):
-                    dominant[x][y] = 1
+                    dominantResult[x][y] = 1
                     print("([{0}][{1}]): True".format(x,y))
                 elif (difference[x][y] == difference[x+1][y+1]):
                     print("([{0}][{1}]): True".format(x,y))
-                    dominant[x][y] = 1
+                    dominantResult[x][y] = 1
                 else:
                     print("([{0}][{1}]): False".format(x,y))
-                    dominant[x][y] = 0
+                    dominantResult[x][y] = 0
             except:
                 pass
-    
 
 def greaterThanMethod(player, playerResult):
     for x in range(len(player)):
@@ -137,7 +132,6 @@ def greaterThanComparision(player1, player2, playerResult1, playerResult2):
             if playerResult1[x][y] == 0 and playerResult2[x][y] == 0:
                 print("Nach Equilibrium Found at Index: [{0}][{1}] with the values '{2}' and '{3}' respectively.".format(x, y, player1[x][y], player2[x][y]))
                 equilibriumFound = True
-    return
 
 #Sub Procedures and Functions for UI elements
 def printMatrix(matrix, title, newLine):
