@@ -6,17 +6,17 @@ import numpy as np
 #Proof of Concept to find the dominant solutions to produce a nach equilibrium where difference values are equal.
 #We may prove the nach equilibrium result by selecting the intersection with the maximum original input value.
 
-#Multiple Nach Equilibrium Test Data
+#Multiple Nach Equilibrium Test Data to show Saddle Point Problem
 player12x2 = [[3, 8],
-           [0, 4]]
+              [0, 4]]
 player22x2 = [[3, 0],
-           [8, 4]]
+              [8, 4]]
 
-##difference2x2 = [[0, 0],
-##              [0, 0]]
+difference2x2 = [[0, 0],
+                 [0, 0]]
 
-##dominant2x2 = [[0, 0],
-##            [0, 0]]
+dominantResult2x2 = [[0, 0],
+                     [0, 0]]
 
 #Matrices re-written in column-down format
 player1 = [[7, 2, 3, 5],
@@ -28,17 +28,6 @@ player2 = [[1, 1, 7, 4],
            [2, 90, 2, 2],
            [4, 4, 90, 4],
            [8, 0, 3, 5]]
-
-#Dominant Strategy Matrices
-difference = [[0, 0, 0, 0],
-              [0, 0, 0, 0],
-              [0, 0, 0, 0],
-              [0, 0, 0, 0]]
-
-dominantResult = [[0, 0, 0, 0],
-                  [0, 0, 0, 0],
-                  [0, 0, 0, 0],
-                  [0, 0, 0, 0]]
 
 #Stupid Strategy Matrices and Variables
 stupidPlayer1 = [[0, 0, 0, 0],
@@ -60,21 +49,25 @@ equilibriumFound = False
 
 #Proposed method for producing entire solution checking for both dominant and stupid solutions.
 def Main():
-    differenceMethod(player1, player2, difference)
-    differenceComparision()
-    printMatrix(difference, "Difference Array", True)
-    printMatrix(dominantResult, "Dominant Array", True)
-
-    greaterThanMethod(player1, stupidPlayer1)
-    greaterThanMethod(player2, stupidPlayer2)
+    print("\n--Program Start--\n")
     print("Game Theory Scenario Analyser")
     print("NB: Player Data Sets are entered by in a horizontal format\nrelative to their strategies.\n")
     
     printMatrix(player1, "Player 1 Data Set", True)
     printMatrix(player2, "Player 2 Data Set", True)
 
+    print("Dominant Strategy Calculation")
+    print("For 2x2 Matrices Only")
+    differenceMethod(player12x2, player22x2, difference2x2)
+    differenceComparision()
+    printMatrix(difference2x2, "Difference Array", True)
+    printMatrix(dominantResult2x2, "Dominant Array", True)
+
     print("Stupid Strategy Calculation")
     print("If you find that both players have a '0' Stupid Strategy Result this shows\na scenario where both players do not fail.\n")
+    greaterThanMethod(player1, stupidPlayer1)
+    greaterThanMethod(player2, stupidPlayer2)
+    
     printMatrix(stupidPlayer1, "Stupid Strategy Player 1 Results", True)
     printMatrix(stupidPlayer2, "Stupid Strategy Player 2 Results", True)
     
@@ -99,20 +92,14 @@ def differenceMethod(player1, player2, difference):
 def differenceComparision():
     for x in range(len(player1 or player2)):
         for y in range(len(player1 or player2)):
-            
-            print("([{0}][{1}])".format(x,y))
             try: 
                 if (difference[x][y] == difference[x][y+1]):
                     dominantResult[x][y] = 1
-                    print("([{0}][{1}]): True".format(x,y))
                 elif (difference[x][y] == difference[x+1][y]):
                     dominantResult[x][y] = 1
-                    print("([{0}][{1}]): True".format(x,y))
                 elif (difference[x][y] == difference[x+1][y+1]):
-                    print("([{0}][{1}]): True".format(x,y))
                     dominantResult[x][y] = 1
                 else:
-                    print("([{0}][{1}]): False".format(x,y))
                     dominantResult[x][y] = 0
             except:
                 pass
@@ -138,16 +125,6 @@ def printMatrix(matrix, title, newLine):
     print(title,":")
     print('\n'.join([''.join(['{:4}'.format(int(item)) for item in row]) for row in matrix]))
     if (newLine): print("")
-
-def userConfirm(question): #Require the user to confirm a qustion and return a boolean result
-    reply = str(input(question+' (y/n): ')).lower().strip()
-    if reply[0] == 'y':
-        return True
-    if reply[0] == 'n':
-        return False
-    else:
-        return userConfirm("Please confirm using yes or no")
-
 
 def end():
     print("\n--Program End--\n")
