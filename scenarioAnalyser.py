@@ -1,6 +1,6 @@
 import sys
 import numpy as np
-#Difference + Silly Strategies Method Solution to find Nach Equilibrium
+#Dominant + Stupid Strategies Method Solution to find Nach Equilibrium
 
 #Dominant Solution NB:
 #Proof of Concept to find the dominant solutions to produce a nach equilibrium where difference values are equal.
@@ -14,6 +14,7 @@ player22x2 = [[3, 0],
 
 ##difference2x2 = [[0, 0],
 ##              [0, 0]]
+
 ##dominant2x2 = [[0, 0],
 ##            [0, 0]]
 
@@ -28,31 +29,36 @@ player2 = [[1, 1, 7, 4],
            [4, 4, 90, 4],
            [8, 0, 3, 5]]
 
+#Dominant Strategy Matrices
 difference = [[0, 0, 0, 0],
-               [0, 0, 0, 0],
-               [0, 0, 0, 0],
-               [0, 0, 0, 0]]
-dominant = [[0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0]]
+              [0, 0, 0, 0],
+              [0, 0, 0, 0],
+              [0, 0, 0, 0]]
 
-sillyPlayer1 = [[0, 0, 0, 0],
+dominantResult = [[0, 0, 0, 0],
+                  [0, 0, 0, 0],
+                  [0, 0, 0, 0],
+                  [0, 0, 0, 0]]
+
+#Stupid Strategy Matrices and Variables
+stupidPlayer1 = [[0, 0, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0]]
 
-sillyPlayer2 = [[0, 0, 0, 0],
+stupidPlayer2 = [[0, 0, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0]]
 
-sillyResult = [[0, 0, 0, 0],
+stupidResult = [[0, 0, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0],
                 [0, 0, 0, 0]]
 
-#Proposed method for producing entire solution checking for both dominant and silly solutions.
+equilibriumFound = False
+
+#Proposed method for producing entire solution checking for both dominant and stupid solutions.
 def Main():
 ##    differenceMethod(player1, player2, difference)
 ##    differenceComparision()
@@ -63,26 +69,29 @@ def Main():
 ##    printMatrix(dominant)
 ##    print("")
 
-    greaterThanMethod(player1, sillyPlayer1)
-    greaterThanMethod(player2, sillyPlayer2)
-
-    print("Player 1: ")
+    greaterThanMethod(player1, stupidPlayer1)
+    greaterThanMethod(player2, stupidPlayer2)
+    print("Game Theory Scenario Analyser")
+    print("NB: Player Data Sets are entered by in a horizontal format\nrelative to their strategies.\n")
+    
+    print("Player 1 Data Set: ")
     printMatrix(player1)
     print("")
-    print("Player 2: ")
+    print("Player 2 Data Set: ")
     printMatrix(player2)
     print("")
+    print("Stupid Strategy Calculation")
+    print("If you find that both players have a '0' Stupid Strategy Result this shows\na scenario where both players do not fail.\n")
+    print("Stupid Strategy Player 1 Results: ")
+    printMatrix(stupidPlayer1)
     print("")
-    print("Silly Player 1 Results: ")
-    printMatrix(sillyPlayer1)
-    print("")
-    print("Silly Player 2 Results: ")
-    printMatrix(sillyPlayer2)
+    print("Stupid Strategy Player 2 Results: ")
+    printMatrix(stupidPlayer2)
     print("")
     
-    greaterThanComparision(sillyPlayer1, sillyPlayer2)
+    greaterThanComparision(player1, player2, stupidPlayer1, stupidPlayer2)
     
-    #print("Silly Strategies Bool Array: ", silly)
+    #print("Stupid Strategies Bool Array: ", stupid)
 
     #NB: Task 3 Addition for potential saddle point calculation
     #probabilityCalculation()
@@ -97,11 +106,6 @@ def differenceMethod(player1, player2, difference):
     for x in range(len(player1 and player2)):
         for y in range(len(player1 and player2)):
             difference[x][y] = abs((player1[x][y])-(player2[x][y]))
-            #print("P1 ([{0}][{1}]): {2}".format(x,y,player1[x][y]))
-            #print("P2 ([{0}][{1}]): {2}".format(x,y,player2[x][y]))
-            #print("Difference: {0}".format(difference[x][y]))
-            #print("Difference Array: ", difference) #If uncommented, show difference array progression through each iteration.
-            #print("")
 
 def differenceComparision():
     for x in range(len(player1 or player2)):
@@ -133,12 +137,13 @@ def greaterThanMethod(player, playerResult):
                 if player[x][z] < player[y][z]:
                     playerResult[x][z] = 1
 
-def greaterThanComparision(playerResult1, playerResult2):
+def greaterThanComparision(player1, player2, playerResult1, playerResult2):
     #Find equilibrium by looking for matching 0 result values
     for x in range(len(playerResult1 and playerResult2)):
         for y in range(len(playerResult1 and playerResult2)):
             if playerResult1[x][y] == 0 and playerResult2[x][y] == 0:
-                print("Nach Equilibrium Found: ", x,y)
+                print("Nach Equilibrium Found at Index: [{0}][{1}] with the values '{2}' and '{3}' respectively.".format(x, y, player1[x][y], player2[x][y]))
+                equilibriumFound = True
     return
 
 #Sub Procedures and Functions for UI elements
