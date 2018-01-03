@@ -74,24 +74,17 @@ def Main():
     print("Game Theory Scenario Analyser")
     print("NB: Player Data Sets are entered by in a horizontal format\nrelative to their strategies.\n")
     
-    print("Player 1 Data Set: ")
-    printMatrix(player1)
-    print("")
-    print("Player 2 Data Set: ")
-    printMatrix(player2)
-    print("")
+    printMatrix(player1, "Player 1 Data Set", True)
+    printMatrix(player2, "Player 2 Data Set", True)
+
     print("Stupid Strategy Calculation")
     print("If you find that both players have a '0' Stupid Strategy Result this shows\na scenario where both players do not fail.\n")
-    print("Stupid Strategy Player 1 Results: ")
-    printMatrix(stupidPlayer1)
-    print("")
-    print("Stupid Strategy Player 2 Results: ")
-    printMatrix(stupidPlayer2)
-    print("")
+    printMatrix(stupidPlayer1, "Stupid Strategy Player 1 Results", True)
+    printMatrix(stupidPlayer2, "Stupid Strategy Player 2 Results", True)
     
     greaterThanComparision(player1, player2, stupidPlayer1, stupidPlayer2)
     
-    #print("Stupid Strategies Bool Array: ", stupid)
+    #print("Stupid Strategies Bool Array: ", stupidResult)
 
     #NB: Task 3 Addition for potential saddle point calculation
     #probabilityCalculation()
@@ -147,8 +140,10 @@ def greaterThanComparision(player1, player2, playerResult1, playerResult2):
     return
 
 #Sub Procedures and Functions for UI elements
-def printMatrix(matrix):
+def printMatrix(matrix, title, newLine):
+    print(title,":")
     print('\n'.join([''.join(['{:4}'.format(int(item)) for item in row]) for row in matrix]))
+    if (newLine): print("")
 
 def userConfirm(question): #Require the user to confirm a qustion and return a boolean result
     reply = str(input(question+' (y/n): ')).lower().strip()
